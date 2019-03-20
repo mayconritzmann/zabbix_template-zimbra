@@ -43,9 +43,9 @@ case "$1" in
   state="$(sudo tail -n 1000 $zimbra_log_file | grep STATUS | grep $1 | tail -1 | awk {'print $12'})"
 
   if [ "$state" == "Running" ]; then
-    echo 0
-  else
     echo 1
+  else
+    echo 0
   fi
   ;;
 esac
