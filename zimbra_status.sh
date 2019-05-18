@@ -7,7 +7,7 @@ if [[ -z "$1" ]]; then
 fi
 
 zimbra_log_file="/var/log/zimbra-stats.log"
-zimbra_discovery="$(sudo tail -n 1000 /var/log/zimbra-stats.log | grep STATUS | cut -d ':' -f 10 | sort | uniq)"
+zimbra_discovery="$(tail -n 1000 /var/log/zimbra-stats.log | grep STATUS | cut -d ':' -f 10 | sort | uniq)"
 
 case "$1" in
   discovery)
@@ -40,7 +40,7 @@ case "$1" in
     exit 1
   fi
 
-  state="$(sudo tail -n 1000 $zimbra_log_file | grep STATUS | grep $1 | tail -1 | awk {'print $12'})"
+  state="$(tail -n 1000 $zimbra_log_file | grep STATUS | grep $1 | tail -1 | awk {'print $12'})"
 
   if [ "$state" == "Running" ]; then
     echo 1
