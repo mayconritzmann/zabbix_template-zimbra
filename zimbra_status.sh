@@ -7,7 +7,7 @@ if [[ -z "$1" ]]; then
 fi
 
 zimbra_log_file="/var/log/zimbra-stats.log"
-zimbra_discovery="$(tail -n 1000 /var/log/zimbra-stats.log | grep STATUS | cut -d ':' -f 10 | sort | uniq)"
+zimbra_discovery="$(su zimbra -c "/opt/zimbra/bin/zmcontrol status" | awk {'print $1'} | grep -v Host)"
 
 case "$1" in
   discovery)
